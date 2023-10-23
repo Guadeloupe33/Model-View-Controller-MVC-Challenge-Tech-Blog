@@ -1,6 +1,3 @@
-
-
-
 const blogPostRoutes = require('./Blogpostroutes')
 const commentRoutes = require('./CommentRoutes')
 const router = require('express').Router()
