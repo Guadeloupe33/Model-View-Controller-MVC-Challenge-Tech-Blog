@@ -1,5 +1,5 @@
-const { BlogPost, User, Comment } = require('../Models')
-const withAuth = require('../Utils/auth')
+const { BlogPost, User, Comment } = require('../models')
+const withAuth = require('../utils/auth')
 const router = require('express').Router()
 
 router.get('/login', (req, res) => {

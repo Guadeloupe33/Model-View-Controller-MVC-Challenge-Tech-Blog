@@ -1,6 +1,6 @@
-const withAuth = require('../../Utils/auth')
+const withAuth = require('../../utils/auth')
 const router = require('express').Router()
-const { BlogPost } = require('../../Models')
+const { BlogPost } = require('../../models')
 
 
 
