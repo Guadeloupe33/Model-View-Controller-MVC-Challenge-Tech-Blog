@@ -1,0 +1,68 @@
+<main class='blog-content mt-5 mx-5'>
+  {{#each posts as |post|}}
+    <div class='blog-card card mb-3 w-100'>
+      <div class='card-body'>
+        <div class='blog-header d-flex justify-content-between'>
+          <div class='blog-info d-flex'>
+            <h2 class='blog-title mr-2'>{{title}}:</h2>
+            <h2 class='blog-date'>{{date}}</h2>
+          </div>
+          <div>
+            <button class='btn btn-secondary edit-button' data-id={{id}}>Edit</button>
+            <button class='btn btn-danger delete-button' data-id={{id}}>Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form id='edit-form-{{id}}' class='blog-form border p-4 rounded' style='display:none;'>
+      <div class='form-group'>
+        <h2 class='form-title'>Edit Post</h2>
+        <label for='edit-title-{{id}}'>Title</label>
+        <input class='form-control' id='edit-title-{{id}}' placeholder='Enter the new title' />
+      </div>
+      <div class='form-group'>
+        <label for='edit-content-{{id}}'>Content</label>
+        <textarea
+          class='form-control'
+          id='edit-content-{{id}}'
+          rows='5'
+          placeholder='Enter the new content'
+        ></textarea>
+      </div>
+      <div class='form-group text-center'>
+        <button class='btn btn-primary edit-button' data-id={{id}}>Edit</button>
+      </div>
+    </form>
+  {{/each}}
+</main>
+<footer class='blog-footer d-flex justify-content-center'>
+  <form id='create-form' class='blog-form border p-4 rounded' style='display:none;'>
+    <div class='form-group'>
+      <h2 class='form-title'>Create a New Post</h2>
+      <label for='postTitle'>Title</label>
+      <input
+        type='text'
+        class='form-control'
+        id='postTitle'
+        placeholder='Enter the title of your new post'
+      />
+    </div>
+    <div class='form-group'>
+      <label for='postContent'>Content</label>
+      <textarea
+        class='form-control'
+        id='postContent'
+        rows='5'
+        placeholder='Write the content of your new post here'
+      ></textarea>
+    </div>
+    <div class='form-group text-center'>
+      <button type='submit' class='btn btn-primary create-button'>
+        Create Post
+      </button>
+    </div>
+  </form>
+  <button id='create-post' type='submit' class='btn btn-primary create-button'>Create Post</button>
+</footer>
+<script src='/js/editDeletePost.js'></script>
+<script src='/js/createPost.js'></script>
