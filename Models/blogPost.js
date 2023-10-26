@@ -1,9 +1,9 @@
-const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection");
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-class blogPost extends Model {}
+class BlogPost extends Model {}
 
-blogPost.init(
+BlogPost.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,33 +11,33 @@ blogPost.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    comment: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    comment: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
     date: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING, // Consider using the DATE or DATETIME data type for dates
       allowNull: false,
     },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: "user",
-        key: "id",
+        model: 'user',
+        key: 'id',
       },
     },
   },
   {
     sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: "blogpost",
+    timestamps: false, // This disables createdAt and updatedAt columns
+    freezeTableName: true, // Prevents Sequelize from pluralizing the table name
+    underscored: true, // Use underscored naming for columns
+    modelName: 'blogpost', // Model name in singular form
   }
 );
 
-module.exports = blogPost;
+module.exports = BlogPost;
