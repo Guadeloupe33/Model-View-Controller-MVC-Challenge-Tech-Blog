@@ -1,6 +1,7 @@
 // Function to handle user login
 const loginFormHandler = async (event) => {
-  event.preventDefault();
+  event.preventDefault(); // Prevent the default form submission behavior
+  console.log('LOGIN FORM'); // Log to the console for debugging
 
   // Get the email and password from the input fields
   const email = document.querySelector('#email-login').value.trim();
@@ -22,11 +23,11 @@ const loginFormHandler = async (event) => {
       alert('Failed to log in');
     }
   }
-};
+}
 
 // Function to handle user signup
 const signupFormHandler = async (event) => {
-  event.preventDefault();
+  event.preventDefault(); // Prevent the default form submission behavior
 
   // Get the name, email, and password from the input fields
   const name = document.querySelector('#name-signup').value.trim();
@@ -49,14 +50,14 @@ const signupFormHandler = async (event) => {
       alert('Failed to sign up.');
     }
   }
-};
+}
 
 // Function for handling the dashboard (if needed)
 const dashboard = async (event) => {
   event.preventDefault();
   // You can add functionality for handling the dashboard here if required.
   // It currently doesn't have any specific functionality.
-};
+}
 
 // Add event listeners for the login and signup forms
 document.querySelector('#form-submit').addEventListener('submit', loginFormHandler);

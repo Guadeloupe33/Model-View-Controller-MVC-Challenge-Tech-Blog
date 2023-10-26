@@ -1,26 +1,34 @@
+<!-- Start of a form with Bootstrap styles applied -->
 <form class="border p-4 rounded">
+  <!-- Form group for the title -->
   <div class="form-group">
     <h2 class="p-1">Create a new Post</h2>
-    <label for="postTitle">Title</label> <!-- Added id for label -->
+    <label for="exampleInputEmail1">Title</label> <!-- Label for the title input field -->
     <input
-      type="text" <!-- Changed input type to "text" for title -->
-      class="form-control"
-      id="postTitle" <!-- Added id for input field -->
-      placeholder="Enter title"
+      type="email" <!-- Input type (Note: should this be 'text' instead of 'email' for a title?) -->
+      class="form-control" <!-- Bootstrap class for styling the input field -->
+      id="exampleInputEmail1" <!-- Unique ID for the input field -->
+      aria-describedby="emailHelp"
+      placeholder="Enter email" <!-- Placeholder text for the title input -->
     />
   </div>
+
+  <!-- Form group for the content -->
   <div class="form-group">
-    <label for="postContent">Content</label> <!-- Added id for label -->
+    <label for="exampleFormControlTextarea1">Content</label> <!-- Label for the content textarea -->
     <textarea
-      class="form-control"
-      id="postContent" <!-- Added id for textarea -->
-      rows="5" <!-- Increased rows for textarea -->
-      placeholder="Enter content"
+      class="form-control" <!-- Bootstrap class for styling the textarea -->
+      id="exampleFormControlTextarea1" <!-- Unique ID for the textarea -->
+      rows="3" <!-- Number of visible rows for the textarea -->
+      placeholder="Enter content" <!-- Placeholder text for the content textarea -->
     ></textarea>
   </div>
+
+  <!-- Button to submit the form -->
   <div class="row justify-content-center">
     <button type="submit" class="col-md-5 btn btn-dark mr-2">
       Create
     </button>
   </div>
 </form>
+<!-- End of the form -->
