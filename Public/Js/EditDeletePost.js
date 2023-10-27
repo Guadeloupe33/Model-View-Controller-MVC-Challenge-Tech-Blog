@@ -1,58 +1,62 @@
 // Delete Post Section
+// Function to handle deleting a blog post
 const deletePostFormHandler = async (event) => {
-  event.preventDefault();
-  const id = event.target.dataset.id;
+  event.preventDefault()
+  const id = event.target.dataset.id
 
-  // Send a DELETE request to the server to delete the post
+  // Send a DELETE request to remove the specified blog post
   const response = await fetch(`/api/blogPost/${id}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
-  });
+  })
 
-  // Log the response for debugging (optional)
-  console.log(response);
+  console.log(response)
 
-  // Check if the response was successful and redirect to the dashboard if it was
   if (response.ok) {
-    document.location.replace(`/dashboard`);
+    // If successful, redirect to the dashboard
+    document.location.replace(`/dashboard`)
   } else {
-    // Show an alert if post deletion failed
-    alert('Failed to delete Post');
+    // If there is an error, show an alert
+    alert('Failed to delete Post')
   }
-};
+}
 
-// Add click event listeners for the delete buttons
-const deleteButtons = document.querySelectorAll('.delete-buttons');
+// Add click event listeners to all delete buttons
+const deleteButtons = document.querySelectorAll('.delete-buttons')
 for (const deleteButton of deleteButtons) {
-  deleteButton.addEventListener('click', deletePostFormHandler);
+  deleteButton.addEventListener('click', deletePostFormHandler)
 }
 
 // Edit Post Section
-let id = 0;
+// Variable to store the ID of the post being edited
+let id = 0
+
+// Function to display the edit form
 const showEdit = async (event) => {
-  event.preventDefault();
+  event.preventDefault()
 
-  // Get the post ID from the data attribute
-  id = event.target.dataset.id;
-  console.log('showEdit: ' + id);
+  // Get the ID of the post to be edited from the clicked button's dataset
+  id = event.target.dataset.id
+  console.log('showEdit: ' + id)
 
-  // Get the edit form element and display it
-  const editFormEl = document.querySelector(`#edit-form-${id}`);
-  editFormEl.style.display = 'block';
-};
+  // Show the edit form corresponding to the clicked post
+  const editFormEl = document.querySelector(`#edit-form-${id}`)
+  editFormEl.style.display = 'block'
+}
 
+// Function to handle editing a blog post
 const editPostHandler = async (event) => {
-  event.preventDefault();
-  console.log('editPostHandler: ' + id);
+  event.preventDefault()
+  console.log('editPostHandler: ' + id)
 
-  // Get the edited title and comment from the input fields
-  const title = document.querySelector(`#edit-title-${id}`).value.trim();
-  console.log(title);
+  // Get updated values from the edit form
+  const title = document.querySelector(`#edit-title-${id}`).value.trim()
+  console.log(title)
 
-  const comment = document.querySelector(`#edit-content-${id}`).value.trim();
-  console.log(comment);
+  const comment = document.querySelector(`#edit-content-${id}`).value.trim()
+  console.log(comment)
 
-  // Send a PUT request to the server to update the post
+  // Send a PUT request to update the specified blog post
   const response = await fetch(`/api/blogPost/${id}`, {
     method: 'PUT',
     body: JSON.stringify({
@@ -60,27 +64,27 @@ const editPostHandler = async (event) => {
       comment,
     }),
     headers: { 'Content-Type': 'application/json' },
-  });
+  })
 
-  // Log the response for debugging (optional)
-  console.log(response);
+  console.log(response)
 
-  // Check if the response was successful and redirect to the dashboard if it was
   if (response.ok) {
-    document.location.replace(`/dashboard`);
+    // If successful, redirect to the dashboard
+    document.location.replace(`/dashboard`)
   } else {
-    // Show an alert if post editing failed
-    alert('Failed to edit Post');
+    // If there is an error, show an alert
+    alert('Failed to edit Post')
   }
-};
-
-// Add click event listeners for the edit buttons and submit edit buttons
-const editButtons = document.querySelectorAll('.edit-buttons');
-for (const editButton of editButtons) {
-  editButton.addEventListener('click', showEdit);
 }
 
-const submitEditButtons = document.querySelectorAll('.edit-btn');
+// Add click event listeners to all edit buttons
+const editButtons = document.querySelectorAll('.edit-buttons')
+for (const editButton of editButtons) {
+  editButton.addEventListener('click', showEdit)
+}
+
+// Add click event listeners to all submit edit buttons
+const submitEditButtons = document.querySelectorAll('.edit-btn')
 for (const submitEdit of submitEditButtons) {
-  submitEdit.addEventListener('click', editPostHandler);
+  submitEdit.addEventListener('click', editPostHandler)
 }
