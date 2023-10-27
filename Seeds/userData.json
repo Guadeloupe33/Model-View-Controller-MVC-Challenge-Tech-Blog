@@ -18,5 +18,10 @@
         "name": "Bill Gate",
         "email": "billgate@gmail.com",
         "password": "guadeloupe33333"
+      },
+      {
+        "name": "Ben Moody",
+        "email": "benmmody24@gmail.com",
+        "password": "password1234"
       }
   ]
