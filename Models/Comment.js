@@ -1,10 +1,13 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+// Import necessary modules
+const { Model, DataTypes } = require('sequelize')
+const sequelize = require('../config/connection')
 
+// Define the Comment model
 class Comment extends Model {}
 
 Comment.init(
   {
+    // Define the columns and their data types
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -12,31 +15,32 @@ Comment.init(
       autoIncrement: true,
     },
     comment: {
-      type: DataTypes.TEXT, // Use TEXT data type for comments to allow longer text
+      type: DataTypes.STRING,
       allowNull: false,
     },
     blogpost_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'blogpost',
-        key: 'id',
+        model: 'blogpost', // Reference the 'blogpost' model
+        key: 'id', // Using the 'id' column of the 'blogpost' model as a foreign key
       },
     },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'user',
-        key: 'id',
+        model: 'user', // Reference the 'user' model
+        key: 'id', // Using the 'id' column of the 'user' model as a foreign key
       },
     },
   },
   {
-    sequelize,
-    timestamps: false, // This disables createdAt and updatedAt columns
-    freezeTableName: true, // Prevents Sequelize from pluralizing the table name
-    underscored: true, // Use underscored naming for columns
-    modelName: 'comment', // Model name in singular form
-  }
-);
+    sequelize, // Use the configured Sequelize connection
+    timestamps: false, // Disable timestamps for this model
+    freezeTableName: true, // Set the table name to be the same as the model name
+    underscored: true, // Use underscored naming for columns (e.g., created_at becomes created_at)
+    modelName: 'comment', // Set the model name to 'comment'
+  },
+)
 
-module.exports = Comment;
+// Export the Comment model for use in other parts of the application
+module.exports = Comment
