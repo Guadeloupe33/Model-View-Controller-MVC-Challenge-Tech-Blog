@@ -1,15 +1,13 @@
-const blogPostRoutes = require('./blogPostRoutes');
-const commentRoutes = require('./commentRoutes');
-const router = require('express').Router();
-const userRoutes = require('./userRoutes');
+// Import necessary modules and routes for user, blog post, and comments
+const router = require('express').Router()
+const userRoutes = require('./userRoutes') // Import user-related routes
+const blogPostRoutes = require('./blogPostRoutes') // Import blog post-related routes
+const commentRoutes = require('./commentRoutes') // Import comment-related routes
 
-// Mount userRoutes under '/user'
-router.use('/user', userRoutes);
+// Use the imported routes with specified prefixes
+router.use('/users', userRoutes) // Mount user routes under the '/users' prefix
+router.use('/blogPost', blogPostRoutes) // Mount blog post routes under the '/blogPost' prefix
+router.use('/comments', commentRoutes) // Mount comment routes under the '/comments' prefix
 
-// Mount blogPostRoutes under '/blogPost'
-router.use('/blogPost', blogPostRoutes);
-
-// Mount commentRoutes under '/comment'
-router.use('/comment', commentRoutes); // Use 'comment' instead of 'Comment' for consistency
-
-module.exports = router;
+// Export the router for use in other parts of the application
+module.exports = router

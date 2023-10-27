@@ -1,68 +1,72 @@
-const router = require('express').Router();
-const { User } = require('../../models');
+// Import necessary modules and models
+const router = require('express').Router()
+const { User } = require('../../models')
 
-// Route for user registration
+// Define a POST route for user registration
 router.post('/', async (req, res) => {
   try {
-    // Create a new user with data from the request
-    const userData = await User.create(req.body);
+    // Create a new user with data from the request body
+    const userData = await User.create(req.body)
 
-    // Save user session data and respond with a 200 OK status
+    // Save user session data and respond with a success status and user data
     req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.loggedIn = true;
-      res.status(200).json(userData);
-    });
-  } catch (err) {
-    // Handle registration errors with a 400 Bad Request status
-    res.status(400).json(err);
-  }
-});
+      req.session.user_id = userData.id
+      req.session.loggedIn = true
 
-// Route for user login
+      res.status(200).json(userData)
+    })
+  } catch (err) {
+    // Handle errors and respond with an error status and message
+    res.status(400).json(err)
+  }
+})
+
+// Define a POST route for user login
 router.post('/login', async (req, res) => {
   try {
-    // Find the user with the provided email
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    // Find a user by email in the database
+    const userData = await User.findOne({ where: { email: req.body.email } })
 
     if (!userData) {
-      // Respond with a 400 Bad Request status and an error message if the user is not found
-      res.status(400).json({ message: 'Incorrect email or password, please try again' });
-      return;
+      // Handle incorrect email or password and respond with an error message
+      res.status(400).json({ message: 'Incorrect email or password, please try again' })
+      return
     }
 
-    // Check the password validity
-    const validPassword = await userData.checkPassword(req.body.password);
+    // Check if the provided password matches the stored hashed password
+    const validPassword = await userData.checkPassword(req.body.password)
 
     if (!validPassword) {
-      // Respond with a 400 Bad Request status and an error message if the password is invalid
-      res.status(400).json({ message: 'Incorrect email or password, please try again' });
-      return;
+      // Handle incorrect password and respond with an error message
+      res.status(400).json({ message: 'Incorrect email or password, please try again' })
+      return
     }
 
-    // Save user session data and respond with user information and a success message
+    // Save user session data and respond with user data and a success message
     req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.loggedIn = true;
-      res.json({ user: userData, message: 'You are now logged in!' });
-    });
-  } catch (err) {
-    // Handle login errors with a 400 Bad Request status
-    res.status(400).json(err);
-  }
-});
+      req.session.user_id = userData.id
+      req.session.loggedIn = true
 
-// Route for user logout
+      res.json({ user: userData, message: 'You are now logged in!' })
+    })
+  } catch (err) {
+    // Handle errors and respond with an error status and message
+    res.status(400).json(err)
+  }
+})
+
+// Define a POST route for user logout
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
-    // Destroy the user session and respond with a 204 No Content status
+    // Destroy the session for logged-in users and respond with a success status
     req.session.destroy(() => {
-      res.status(204).end();
-    });
+      res.status(204).end()
+    })
   } else {
-    // Respond with a 404 Not Found status if the user is not logged in
-    res.status(404).end();
+    // Respond with a not found status if the user is not logged in
+    res.status(404).end()
   }
-});
+})
 
-module.exports = router;
+// Export the router for use in other parts of the application
+module.exports = router

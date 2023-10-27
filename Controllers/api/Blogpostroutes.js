@@ -1,71 +1,63 @@
-const router = require('express').Router();
-const { BlogPost } = require('../../models');
-const withAuth = require('../../utils/auth');
+// Import necessary modules and models
+const router = require('express').Router()
+const { BlogPost } = require('../../models')
+const withAuth = require('../../utils/auth')
 
-// Create a new blog post
+// Define a POST route for creating a new blog post
 router.post('/', withAuth, async (req, res) => {
   try {
-    // Create a new blog post with data from the request
+    // Create a new blog post using data from the request body
     const blogPostData = await BlogPost.create({
       title: req.body.title,
       comment: req.body.comment,
       date: req.body.date,
-      user_id: req.session.user_id,
-    });
+      user_id: req.session.user_id, // Assign the user's ID from the session
+    })
 
-    // Respond with a 201 Created status and the created blog post data
-    res.status(201).json(blogPostData);
+    // Respond with a success status and the created blog post data
+    res.status(200).json(blogPostData)
   } catch (err) {
-    console.error(err);
-    // Handle errors by responding with a 400 Bad Request status
-    res.status(400).json({ error: 'Failed to create a blog post.' });
+    // Handle errors and respond with an error status and message
+    console.log(err)
+    res.status(400).json(err)
   }
-});
+})
 
-// Delete a blog post by ID
+// Define a DELETE route for deleting a blog post by ID
 router.delete('/:id', withAuth, async (req, res) => {
   try {
-    // Attempt to delete a blog post by ID
-    const deletedCount = await BlogPost.destroy({
+    // Delete a blog post based on the ID provided in the URL parameters
+    const post = BlogPost.destroy({
       where: {
         id: req.params.id,
       },
-    });
+    })
 
-    // Check if any blog posts were deleted and respond accordingly
-    if (deletedCount > 0) {
-      res.status(200).json({ message: 'Blog post deleted successfully.' });
-    } else {
-      // Respond with a 404 Not Found status if the resource doesn't exist
-      res.status(404).json({ error: 'Blog post not found.' });
-    }
+    // Respond with a success status and the result of the deletion
+    res.status(200).json(post)
   } catch (err) {
-    console.error(err);
-    // Handle server errors with a 500 Internal Server Error status
-    res.status(500).json({ error: 'Internal server error.' });
+    // Handle errors and respond with an error status and message
+    console.log(err)
+    res.status(500).json(err)
   }
-});
+})
 
-// Edit a blog post by ID
+// Define a PUT route for updating a blog post by ID
 router.put('/:id', withAuth, async (req, res) => {
   try {
-    // Update a blog post by ID with data from the request
-    const [updatedCount] = await BlogPost.update(req.body, {
+    // Update a blog post with the data from the request body based on the ID provided
+    const blogPost = BlogPost.update(req.body, {
       where: { id: req.params.id },
-    });
+    })
 
-    // Check if any blog posts were updated and respond accordingly
-    if (updatedCount > 0) {
-      res.status(200).json({ message: 'Blog post updated successfully.' });
-    } else {
-      // Respond with a 404 Not Found status if the resource doesn't exist
-      res.status(404).json({ error: 'Blog post not found.' });
-    }
+    // Respond with a success status and the result of the update
+    res.status(200).json(blogPost)
   } catch (err) {
-    console.error(err);
-    // Handle server errors with a 500 Internal Server Error status
-    res.status(500).json({ error: 'Internal server error.' });
+    // Handle errors and respond with an error status and message
+    console.log(err)
+    res.status(500).json(err)
   }
-});
+})
 
-module.exports = router;
+// Export the router for use in other parts of the application
+module.exports = router
