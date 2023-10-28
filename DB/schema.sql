@@ -1,8 +1,4 @@
--- Drop the database if it exists (use with caution)
-DROP DATABASE IF EXISTS mvc_db;
+DROP DATABASE IF EXISTS tech_blog;
 
--- Create a new database named mvc_db
-CREATE DATABASE mvc_db;
-
--- Switch to the mvc_db database for subsequent queries
-USE mvc_db;
+CREATE DATABASE tech_blog;
+USE tech_blog; 

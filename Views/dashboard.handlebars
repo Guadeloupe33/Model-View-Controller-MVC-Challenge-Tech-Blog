@@ -1,71 +1,13 @@
-<main class='mt-5 ml-5 mr-5'>
-  {{#each posts as |post|}}
-    <div class='card mb-3 w-100 mr-5' style='width: 18rem'>
-      <div class='card-body'>
-        <div class='card-header d-flex justify-content-between'>
-          <div class='d-flex'>
-            <h5 class='card-title mr-2'>{{title}}:</h5>
-            <h5 class='card-text'>{{date}}</h5>
-          </div>
-          <div>
-            <button class='btn btn-dark edit-buttons' data-id={{id}}>Edit</button>
-            <button class='btn btn-dark delete-buttons' data-id={{id}}>Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <form id='edit-form-{{id}}' class='border p-4 rounded' style='display:none;'>
-      <div class='form-group'>
-        <h2 class='p-1'>Edit Post</h2>
-        <label for='edit-title-{{id}}'>Title</label>
-        <input class='form-control' id='edit-title-{{id}}' placeholder='Enter title' />
-      </div>
-      <div class='form-group'>
-        <label for='edit-content-{{id}}'>Content</label>
-        <textarea
-          class='form-control'
-          id='edit-content-{{id}}'
-          rows='3'
-          placeholder='Enter content'
-        ></textarea>
-      </div>
-      <div class='row justify-content-center'>
-        <button class='btn btn-dark edit-btn' class='col-md-5 btn btn-dark mr-2'>
-          Edit
-        </button>
-      </div>
-    </form>
+{{#if posts.length}}
+<section>
+  <h2>Your Posts</h2>
+    {{#each posts as |post|}}
+      {{> dashboard-postinfo post}}
+    {{/each}}
 
-  {{/each}}
-</main>
-<footer class='d-flex justify-content-center'>
-  <form id='create-form' class='border p-4 rounded' style='display:none;'>
-    <div class='form-group'>
-      <h2 class='p-1'>Create a new Post</h2>
-      <label for='create-title'>Title</label>
-      <input
-        class='form-control'
-        id='create-title'
-        aria-describedby='emailHelp'
-        placeholder='Enter title'
-      />
-    </div>
-    <div class='form-group'>
-      <label for='create-content'>Content</label>
-      <textarea
-        class='form-control'
-        id='create-content'
-        rows='3'
-        placeholder='Enter content'
-      ></textarea>
-    </div>
-    <div class='row justify-content-center'>
-      <button id='create-btn' type='submit' class='col-md-5 btn btn-dark mr-2'>
-        Create
-      </button>
-    </div>
-  </form>
-  <button id='create-post' type='submit' class='btn btn-dark'>Create Post</button>
-</footer>
-<script src='/js/editDeletePost.js'></script>
-<script src='/js/createPost.js'></script>
+</section>
+{{/if}}
+
+<button type="submit" class="btn"><a class="link" href="/dashboard/new">+ New Post</a></button>
+
+<script src="/javascript/add-post.js"></script>
