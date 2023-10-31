@@ -25,6 +25,9 @@
 [![Questions](#questions)](#questions)
 ![Project Screenshot ](public/screenshot/techblog image .jpg)
 
+![Local Image](./public/screenshot/techblog%20image%20.jpg)
+
+
 ## Description
 
 The Tech Blog is a full-stack web application that allows users to create accounts, write and publish blog posts, and interact with other users by adding comments to blog posts. It provides a platform for technology enthusiasts to share their thoughts and ideas with the community.
