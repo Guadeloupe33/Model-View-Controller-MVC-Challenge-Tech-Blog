@@ -15,10 +15,6 @@
   },
   "author": "Steven Francius",
   "license": "MIT",
-  "engines": {
-    "node": "16.x",
-    "npm": "8.x"
-  },
   "dependencies": {
     "bcrypt": "^5.0.0",
     "connect-session-sequelize": "^6.1.1",
@@ -31,5 +27,5 @@
     "jest": "^26.4.2",
     "nodemon": "^2.0.4"
   }
- 
+
 }
